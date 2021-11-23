@@ -1,0 +1,26 @@
+{% extends "../../base.html" %} 
+
+{% block materia %}
+{% load humanize %}
+
+<table>
+    <tr>
+        <th>Titulo</th>
+        <th>Calificacion</th>
+        <th>Etiqueta</th>
+    </tr>
+
+    {% for m in material %}
+
+    <tr>
+        <td>{{ m.Titulo | title }}</td>
+        <td>{{ m.Calificacion | intcomma }}</td>
+        <td>{{ m.etiqueta | title }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "../base.html" %}
+
+
+{% block title %} PDT Massive {% endblock %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+    <div class="container">
+
+        <div class="col-12 col-md-6 offset-md-3">
+
+            <div class="car">
+                <div class="card-body">
+                    <h2>Registro de usuario</h2>
+                    <hr>
+                    <form action="" method="post"> 
+                        {% csrf_token %}
+                        {{ form | crispy }}
+
+                        <input type="submit" value="Registrar">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endblock %}
