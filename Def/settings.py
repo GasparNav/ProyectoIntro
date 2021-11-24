@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = "/uploads/"
 
 # Application definition
 

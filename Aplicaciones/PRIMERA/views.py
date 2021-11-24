@@ -60,3 +60,12 @@ def listar_material(request):
     }
 
     return render(request, 'app/material/listar.html', data)
+
+
+def detalle(request):
+    id = request.GET.get('id', '')
+    materiales = material.objects.filter(id=id)
+    data = {
+        "materiales": materiales
+        }
+    return render(request,"detalle.html", data)
