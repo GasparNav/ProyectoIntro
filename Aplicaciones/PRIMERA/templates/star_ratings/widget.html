@@ -1,0 +1,13 @@
+{% extends "star_ratings/widget_base.html" %}
+{% block rating_average %}
+    <div class="star-ratings-rating-average">Promedio: <span class='star-ratings-rating-value'>{{ rating.average|floatformat:"-2" }}</span></div>
+{% endblock rating_average %}
+{% block rating_count %}
+    <div class="star-ratings-rating-count">Cantidad de Votos: <span class='star-ratings-rating-value'>{{ rating.count }}</span></div>
+{% endblock rating_count %}
+{% block rating_user %}
+    <div class="star-ratings-rating-user">Tu puntaje: <span class='star-ratings-rating-value' data-when-null="No Calificado">{% if user_rating %}{{ user_rating.score }}{% else %}No Calificado{% endif %}</span></div> 
+    {% if not user.is_authenticated and not anonymous_ratings and not read_only %}
+        <p>Por favor inicia sesion o registrate para calificar</p>
+    {% endif %}
+{% endblock rating_user %}

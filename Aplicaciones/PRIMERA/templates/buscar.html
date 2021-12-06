@@ -1,0 +1,55 @@
+{% extends "./base.html" %} 
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+<br><br>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Buscar material</h2>
+                        <hr>    
+                <form action="" method="get">
+
+                    {% csrf_token %}
+                    {{ form | crispy}}
+
+                    <div class="d-flex justify-content-center">
+                        <input type="text" value="" name="keyword" id="keyword">
+                        &nbsp;
+                        <input type="submit" value="Buscar" class="btn btn-primary">
+
+                    </div>
+
+
+                </form>
+                {{mensaje}}
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% for m in materiales %}
+        
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{m.titulo}}</h5>
+              <p class="card-text">{{m.descripcion}}</p>
+              <a href="/detalle?id={{m.id}}" class="btn btn-primary">Ver detalles</a>
+            </div>
+          </div>
+          {% endfor %}
+    </div>  
+    <div>
+
+
+    </div>
+    
+
+</div>
+{% endblock %}

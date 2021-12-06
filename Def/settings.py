@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Aplicaciones.PRIMERA',
     'crispy_forms',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [

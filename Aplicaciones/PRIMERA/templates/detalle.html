@@ -1,5 +1,5 @@
 {% extends "./base.html" %}
-
+{% load ratings %}
 {% block title %} PDT Massive {% endblock %}
 
 {% block body %}
@@ -13,17 +13,33 @@
               <h5 class="card-title">{{m.titulo}}</h5>
               <p class="card-text">{{m.descripcion}}</p>
               <p class="card-text">{{m.tipo}}</p>
-              <p class="card-text">{{m.calificacion}}</p>
               <a href="{{ MEDIA_URL }}{{m.archivo.url}}">Uploaded File</a>
+              {% ratings m %}
             </div>
           </div>
           {% endfor %}
+
+
     </div>  
     <div>
 
 
     </div>
-    
+
+    <hr>
+{% for comment in comentarios %}
+    <div class="comment">
+        <div class="date">{{ comment.fecha_creacion }}</div>
+        <strong>{{ comment.autor }}</strong>
+        <p>{{ comment.texto|linebreaks }}</p>
+    </div>
+{% empty %}
+    <p>No hay comentarios aun :(</p>
+{% endfor %}
+
+{% for m in materiales %}
+    <a class="btn btn-default" href="agregar_comentario?id={{m.id}}">Agregar comentario</a>
+{% endfor %}
 
 </div>
 {% endblock %}

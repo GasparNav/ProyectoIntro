@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import material
+from .models import material, comentario
 
 class CustomUserCreationForm(UserCreationForm):
     
@@ -19,4 +19,8 @@ class materialForm(forms.ModelForm):
             "fecha_subida": forms.SelectDateWidget()    
         }
 
-         
+class ComentariosForm(forms.ModelForm):
+
+    class Meta:
+        model = comentario
+        fields = ('autor', 'texto',)

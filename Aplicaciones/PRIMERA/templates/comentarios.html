@@ -1,0 +1,13 @@
+{% extends "./base.html" %}
+
+{% block title %} PDT Massive {% endblock %}
+
+{% block body %}
+
+<h1>Nuevo Comentario</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Enviar Comentario</button>
+    </form>
+
+{% endblock %}

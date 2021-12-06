@@ -1,15 +1,30 @@
 from django.shortcuts import render
-from .models import material
-from .forms import CustomUserCreationForm , materialForm   
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from django.shortcuts import redirect
+from .models import material, comentario
+from .forms import CustomUserCreationForm , materialForm, ComentariosForm
+from django.shortcuts import redirect,get_object_or_404
+from django.db.models import Q
+
 
 # Create your views here.
 
 def home(request):
-    materiallistados = material.objects.all()
-    return render(request,"gestion.html", {"cursos": materiallistados})
+    #matematicas:
+    materiales = material.objects.order_by('-ratings__average')
+    materiales_mate = materiales.filter(Q(etiquetas__icontains="matematicas"))
+    materiales_ciencias = materiales.filter(Q(etiquetas__icontains="ciencias")|Q(etiquetas__icontains="biologia")|Q(etiquetas__icontains="fisica")|Q(etiquetas__icontains="quimica"))
+    materiales_lenguaje = materiales.filter(Q(etiquetas__icontains="lenguaje"))
+    materiales_historia = materiales.filter(Q(etiquetas__icontains="historia"))
+
+    data = {
+        'materiales_historia': materiales_historia,
+        'materiales_mate': materiales_mate,
+        'materiales_ciencias': materiales_ciencias,
+        'materiales_lenguaje': materiales_lenguaje,
+
+    }
+    return render(request, 'gestion.html', data)
+
+    
 
 def top(request):
     materiales = material.objects.all()
@@ -65,7 +80,39 @@ def listar_material(request):
 def detalle(request):
     id = request.GET.get('id', '')
     materiales = material.objects.filter(id=id)
+    comentarios = comentario.objects.filter(material_id=id)
     data = {
-        "materiales": materiales
+        "materiales": materiales,
+        "comentarios": comentarios
         }
     return render(request,"detalle.html", data)
+
+def search(request):
+    materiales = material.objects.order_by('fecha_subida')
+    #materiales  = ''
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            materiales = materiales.filter(Q(etiquetas__icontains=keyword)|Q(descripcion__icontains=keyword)|Q(titulo__icontains=keyword))
+
+    data = {
+        'materiales': materiales,
+    }
+    return render(request, 'buscar.html', data)
+
+def agregar_comentario(request):
+    id = request.GET.get('id', '')
+    material_s = get_object_or_404(material, id=id)
+
+    if request.method == "POST":
+        form = ComentariosForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.material = material_s
+            comment.save()
+            #messages.success(request, "Registro Exitoso")
+            return redirect(to="/")
+            #return redirect('/detalle', id=id)
+    else:
+        form = ComentariosForm()
+        return render(request, 'comentarios.html', {'form': form})
