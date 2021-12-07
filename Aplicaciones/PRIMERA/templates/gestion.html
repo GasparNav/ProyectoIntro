@@ -4,14 +4,14 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4" >
         <img src="/uploads/Matematicas.png" alt="" width = 400>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
         {% for m in materiales_mate %}
         
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
+        <div class="card" style="width: 18rem;" >
+            <div class="card-body" >
               <h5 class="card-title">{{m.titulo}}</h5>
               <p class="card-text">{{m.descripcion}}</p>
               <p class="card-text">{% ratings m %}</p>
