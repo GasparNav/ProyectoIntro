@@ -22,3 +22,4 @@ urlpatterns = [
     path('', include('Aplicaciones.PRIMERA.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
