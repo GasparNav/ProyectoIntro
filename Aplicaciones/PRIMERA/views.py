@@ -10,10 +10,10 @@ from django.db.models import Q
 def home(request):
     #matematicas:
     materiales = material.objects.order_by('-ratings__average')
-    materiales_mate = materiales.filter(Q(etiquetas__icontains="matematicas"))
+    materiales_mate = materiales.filter(Q(etiquetas__icontains="matematicas")|Q(titulo__icontains="matematicas"))
     materiales_ciencias = materiales.filter(Q(etiquetas__icontains="ciencias")|Q(etiquetas__icontains="biologia")|Q(etiquetas__icontains="fisica")|Q(etiquetas__icontains="quimica"))
-    materiales_lenguaje = materiales.filter(Q(etiquetas__icontains="lenguaje"))
-    materiales_historia = materiales.filter(Q(etiquetas__icontains="historia"))
+    materiales_lenguaje = materiales.filter(Q(etiquetas__icontains="lenguaje")|Q(titulo__icontains="lenguaje"))
+    materiales_historia = materiales.filter(Q(etiquetas__icontains="historia")|Q(titulo__icontains="historia"))
 
     data = {
         'materiales_historia': materiales_historia,
@@ -116,3 +116,6 @@ def agregar_comentario(request):
     else:
         form = ComentariosForm()
         return render(request, 'comentarios.html', {'form': form})
+
+def qs(request):
+    return render(request,"quienessomos.html")
