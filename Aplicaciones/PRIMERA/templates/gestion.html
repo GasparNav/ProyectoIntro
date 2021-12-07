@@ -52,7 +52,7 @@
                             <div class="card-body">
                               <h5 class="card-title">{{m.titulo}}</h5>
                               <p class="card-text">{{m.descripcion}}</p>
-                              <p class="card-text">{{m.ratings}}</p>
+                              <p class="card-text">{% ratings m %}</p>
                               <a href="/detalle?id={{m.id}}" class="btn btn-primary">Ver detalles</a>
                             </div>
                           </div>
