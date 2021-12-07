@@ -8,7 +8,6 @@
         {% for m in materiales %}
         
         <div class="card" style="width: 18rem;">
-            
             <div class="card-body">
               <h5 class="card-title">{{m.titulo}}</h5>
               <p class="card-text">{{m.descripcion}}</p>
@@ -29,7 +28,7 @@
     <hr>
 {% for comment in comentarios %}
     <div class="comment">
-        <div class="date">{{ comment.fecha_creacion }}</div>
+        <div class="date, text-dark">{{ comment.fecha_creacion }}</div>
         <strong>{{ comment.autor }}</strong>
         <p>{{ comment.texto|linebreaks }}</p>
     </div>
@@ -38,7 +37,7 @@
 {% endfor %}
 
 {% for m in materiales %}
-    <a class="btn btn-default" href="agregar_comentario?id={{m.id}}">Agregar comentario</a>
+    <a class="text-dark" href="agregar_comentario?id={{m.id}}">Agregar comentario</a>
 {% endfor %}
 
 </div>
